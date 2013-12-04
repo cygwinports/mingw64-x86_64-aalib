@@ -1,0 +1,14 @@
+For FD_SET, FD_ZERO, select(); this also requires adding -lws2_32 to LIBS.
+
+--- origsrc/aalib-1.4.0/src/aastdin.c	2001-04-26 09:37:31.000000000 -0500
++++ src/aalib-1.4.0/src/aastdin.c	2013-12-03 20:16:46.560838100 -0600
+@@ -5,6 +5,9 @@
+ #include <setjmp.h>
+ #include <sys/time.h>
+ #include <sys/types.h>
++#ifdef _WIN32
++#include <winsock2.h>
++#endif
+ #ifdef GPM_MOUSEDRIVER
+ #include <gpm.h>
+ #endif

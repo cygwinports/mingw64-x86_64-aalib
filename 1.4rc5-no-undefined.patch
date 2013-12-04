@@ -1,0 +1,11 @@
+--- origsrc/aalib-1.4.0/src/Makefile.am	2001-04-26 16:37:31.000000000 +0200
++++ src/aalib-1.4.0/src/Makefile.am	2013-04-02 13:05:41.422100100 +0200
+@@ -57,7 +57,7 @@ libaa_la_SOURCES= \
+        aaattrs.c \
+        aaputpixel.c \
+        aarecfunc.c 
+-libaa_la_LDFLAGS=@LDFLAGS@ -version-info 1:4:0
++libaa_la_LDFLAGS=@LDFLAGS@ -version-info 1:4:0 -no-undefined
+ bin_PROGRAMS=aainfo aatest aafire aasavefont
+ 
+ aainfo_LDADD= libaa.la
