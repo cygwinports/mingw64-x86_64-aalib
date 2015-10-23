@@ -3,7 +3,7 @@ inherit cross
 
 NAME="mingw64-x86_64-aalib"
 VERSION=1.4rc5
-RELEASE=1
+RELEASE=2
 CATEGORY="Devel"
 SUMMARY="ASCII art library for Win64 toolchain"
 DESCRIPTION="AA-lib is a low level gfx library just as many other libraries are.
@@ -20,16 +20,23 @@ PATCH_URI="
 	1.4rc5-win32.patch
 "
 
-DISTCLEANFILES="aclocal.m4"
-
 CYGCONF_ARGS="
 	--with-ncurses=${CROSS_PREFIX}
 	--with-curses-driver
 	--without-slang-driver
+	--without-x11-driver
 "
 LIBS="-lws2_32"
 
+src_compile() {
+	cd ${B}
+	export ac_cv_func_connect=yes
+	export ac_cv_func_gethostbyname=yes
+	cygconf
+	cygmake LIBTOOL=${CROSS_BINDIR}/libtool
+}
+
 src_install() {
 	cd ${B}
-	cyginstall bin_PROGRAMS= man_MANS= INFO_DEPS=
+	cyginstall LIBTOOL=${CROSS_BINDIR}/libtool bin_PROGRAMS= man_MANS= INFO_DEPS=
 }
